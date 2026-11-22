@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarPredict AI | Energy Intelligence</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="brand">
+        <div class="brand-icon">☀</div>
+        <span>SolarPredict<span class="brand-ai"> AI</span></span>
+    </div>
+
+    <div class="nav-right">
+        <span class="status-dot"></span>
+        <span>AI Prediction System</span>
+    </div>
+</nav>
+
+<main class="page-wrapper">
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="eyebrow">
+                <span class="eyebrow-line"></span>
+                INTELLIGENT ENERGY FORECASTING
+            </div>
+
+            <h1>Power your future<br>with <span>solar intelligence.</span></h1>
+
+            <p class="hero-description">
+                Predict solar energy generation using real-world weather
+                conditions and our trained XGBoost machine learning model.
+            </p>
+
+            <div class="hero-points">
+                <div><span>✓</span> XGBoost powered</div>
+                <div><span>✓</span> Weather-based prediction</div>
+                <div><span>✓</span> Instant results</div>
+            </div>
+        </div>
+
+        <div class="solar-visual">
+            <div class="sun-glow"></div>
+            <div class="sun">☀</div>
+
+            <div class="energy-label">
+                <span class="energy-label-icon">↗</span>
+                CLEAN ENERGY
+                <strong>SMARTER TOMORROW</strong>
+            </div>
+
+            <div class="solar-panel">
+                <div class="panel-grid">
+                    <span></span><span></span><span></span>
+                    <span></span><span></span><span></span>
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <div class="visual-caption">
+                <span class="caption-dot"></span>
+                HARNESS THE POWER OF THE SUN
+            </div>
+        </div>
+    </section>
+
+    <section class="section-heading">
+        <div>
+            <p class="section-kicker">PREDICTION WORKSPACE</p>
+            <h2>Solar production estimator</h2>
+            <p class="section-subtitle">
+                Configure the environmental conditions to generate your prediction.
+            </p>
+        </div>
+
+        <div class="model-badge">
+            <span class="model-dot"></span>
+            XGBOOST MODEL
+        </div>
+    </section>
+
+    <section class="dashboard-grid">
+
+        <div class="prediction-card">
+            <div class="card-heading">
+                <div class="heading-icon">☀</div>
+                <div>
+                    <h3>Weather configuration</h3>
+                    <p>Set the conditions for your solar forecast</p>
+                </div>
+            </div>
+
+            <form id="predictionForm">
+
+                <div class="input-group">
+                    <label for="weather">WEATHER CONDITION</label>
+
+                    <select id="weather">
+                        <option value="Sunny">☀ Sunny</option>
+                        <option value="Partly Cloudy">🌤 Partly Cloudy</option>
+                        <option value="Cloudy">☁ Cloudy</option>
+                        <option value="Rainy">🌧 Rainy</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <div class="range-title">
+                        <label for="sunshine">SUNLIGHT INTENSITY</label>
+                        <div class="range-value">
+                            <span id="sunshineValue">75</span><small>%</small>
+                        </div>
+                    </div>
+
+                    <input type="range" id="sunshine"
+                           min="0" max="100" value="75">
+
+                    <div class="range-limits">
+                        <span>Low sunlight</span>
+                        <span>Maximum sunlight</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="range-title">
+                        <label for="temperature">AIR TEMPERATURE</label>
+                        <div class="range-value">
+                            <span id="temperatureValue">{{ temperature_default }}</span>
+                            <small>°C</small>
+                        </div>
+                    </div>
+
+                    <input type="range" id="temperature"
+                           min="{{ temperature_min }}"
+                           max="{{ temperature_max }}"
+                           step="0.1"
+                           value="{{ temperature_default }}">
+
+                    <div class="range-limits">
+                        <span>Cool</span>
+                        <span>Hot</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="range-title">
+                        <label for="wind">WIND SPEED</label>
+                        <div class="range-value">
+                            <span id="windValue">{{ wind_default }}</span>
+                            <small>m/s</small>
+                        </div>
+                    </div>
+
+                    <input type="range" id="wind"
+                           min="{{ wind_min }}"
+                           max="{{ wind_max }}"
+                           step="0.1"
+                           value="{{ wind_default }}">
+
+                    <div class="range-limits">
+                        <span>Calm wind</span>
+                        <span>Strong wind</span>
+                    </div>
+                </div>
+
+                <button type="submit" id="predictBtn">
+                    <span>Generate Prediction</span>
+                    <span class="button-arrow">→</span>
+                </button>
+
+                <p class="form-note">
+                    ✦ Prediction generated using your trained machine learning model
+                </p>
+
+            </form>
+        </div>
+
+        <div class="side-column">
+
+            <div class="info-card">
+                <div class="info-top">
+                    <span class="info-icon">⚡</span>
+                    <span class="info-tag">AI INSIGHT</span>
+                </div>
+
+                <h3>Smarter solar<br>energy planning.</h3>
+
+                <p>
+                    Understand how changing environmental conditions
+                    can influence estimated solar power generation.
+                </p>
+
+                <div class="info-divider"></div>
+
+                <div class="info-footer">
+                    <span>MODEL</span>
+                    <strong>XGBoost Regressor</strong>
+                </div>
+            </div>
+
+            <div id="result" class="result-card" style="display:none;">
+                <div class="result-top">
+                    <span class="result-icon">⚡</span>
+                    <span>YOUR PREDICTION</span>
+                </div>
+
+                <p class="result-description">
+                    Estimated solar energy production
+                </p>
+
+                <h2>
+                    <span id="predictionValue">0</span>
+                    <small>kWh</small>
+                </h2>
+
+                <div class="result-divider"></div>
+
+                <p class="result-note">
+                    Generated by your trained XGBoost model
+                </p>
+            </div>
+
+            <div id="error" class="error-box" style="display:none;"></div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-brand">☀ SolarPredict AI</div>
+        <p>Intelligent Solar Energy Generation Prediction</p>
+        <span>Powered by Machine Learning</span>
+    </footer>
+
+</main>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
